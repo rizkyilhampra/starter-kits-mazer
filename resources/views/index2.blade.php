@@ -1,4 +1,4 @@
-@extends('layouts.layout-vertical.main')
+@extends('layouts.layout-horizontal.main')
 @section('content')
     <div class="page-content">
         <section class="row">
