@@ -6,6 +6,7 @@ use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
 class RedirectIfAuthenticated
@@ -21,6 +22,11 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                if (Gate::allows('admin')) {
+                    return redirect(RouteServiceProvider::ADMIN);
+                } else if (Gate::allows('user')) {
+                    return redirect(RouteServiceProvider::USER);
+                }
                 return redirect(RouteServiceProvider::HOME);
             }
         }
