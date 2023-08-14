@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             AuthGroupSeeder::class,
             UsersSeeder::class,
             AuthGroupUsersSeeder::class,
+            BooksSeeder::class,
         ]);
     }
 }

@@ -270,3 +270,9 @@
         </section>
     </div>
 @endsection
+
+@push('library-js')
+    <!-- Need: Apexcharts -->
+    <script src="{{ asset('assets/js/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+@endpush
