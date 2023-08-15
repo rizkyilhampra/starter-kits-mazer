@@ -1,6 +1,13 @@
 @extends('layouts.layout-vertical.main')
 @section('content')
     <div class="page-content">
+        @if (session('success'))
+            @component('components.alert-heading')
+                @slot('type', 'primary')
+                @slot('title', 'Welcome Back, Admin!')
+                Bagaimana kabar anda hari ini?
+            @endcomponent
+        @endif
         <section class="row">
             <div class="col-12">
                 <div class="row">
