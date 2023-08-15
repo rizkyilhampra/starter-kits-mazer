@@ -25,5 +25,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('active', function (string $path) {
             return "<?php echo Request::is($path) ? 'active' : ''; ?>";
         });
+
+        Blade::directive('is_invalid', function (string $errorName) {
+            return "<?php echo \$errors->has($errorName) ? 'is-invalid' : ''; ?>";
+        });
     }
 }

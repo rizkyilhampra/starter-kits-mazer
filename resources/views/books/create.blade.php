@@ -2,105 +2,105 @@
 @section('title', 'Create Books')
 @section('content')
     <div class="page-heading">
-        <div class="page-title">
-            <div class="row">
-                <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Vertical Layout with Navbar</h3>
-                    <p class="text-subtitle text-muted">
-                        Navbar will appear on the top of the page.
-                    </p>
-                </div>
-                <div class="col-12 col-md-6 order-md-2 order-first">
-                    <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="index.html">Dashboard</a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">
-                                Layout Vertical Navbar
-                            </li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <section id="multiple-column-form">
-            <div class="row match-height">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Multiple Column</h4>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body">
-                                <form class="form">
-                                    <div class="row">
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="first-name-column">First Name</label>
-                                                <input type="text" id="first-name-column" class="form-control"
-                                                    placeholder="First Name" name="fname-column" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="last-name-column">Last Name</label>
-                                                <input type="text" id="last-name-column" class="form-control"
-                                                    placeholder="Last Name" name="lname-column" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="city-column">City</label>
-                                                <input type="text" id="city-column" class="form-control"
-                                                    placeholder="City" name="city-column" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="country-floating">Country</label>
-                                                <input type="text" id="country-floating" class="form-control"
-                                                    name="country-floating" placeholder="Country" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="company-column">Company</label>
-                                                <input type="text" id="company-column" class="form-control"
-                                                    name="company-column" placeholder="Company" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="email-id-column">Email</label>
-                                                <input type="email" id="email-id-column" class="form-control"
-                                                    name="email-id-column" placeholder="Email" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-12">
-                                            <div class="form-check">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" id="checkbox5" class="form-check-input"
-                                                        checked />
-                                                    <label for="checkbox5">Remember Me</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary me-1 mb-1">
-                                                Submit
-                                            </button>
-                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">
-                                                Reset
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        @component('components.page-title')
+            @slot('title', 'Tambah Data Buku')
+            @slot('subtitle', 'Halaman tambah data buku')
+            <li class="breadcrumb-item ">
+                <a href="{{ route('books.index') }}">Books</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Tambah Data Buku
+            </li>
+        @endcomponent
+
+        @include('components.form', [
+            'method' => 'POST',
+            'route' => route('books.store'),
+            'formGroup' => [
+                view('components.form-group', [
+                    'col' => 'col-md-6 col-12',
+                    'label' => 'Nama Buku',
+                    'invalidFeedback' => $errors->first('name'),
+                    'field' => view('components.input', [
+                        'type' => 'text',
+                        'name' => 'name',
+                        'value' => old('name'),
+                        'placeholder' => 'Masukkan Nama Buku',
+                        'required' => true,
+                    ]),
+                ]),
+                view('components.form-group', [
+                    'col' => 'col-md-6 col-12',
+                    'label' => 'Penulis',
+                    'invalidFeedback' => $errors->first('autthor'),
+                    'field' => view('components.input', [
+                        'type' => 'text',
+                        'name' => 'author',
+                        'value' => old('author'),
+                        'placeholder' => 'Masukkan Nama Penulis',
+                        'required' => true,
+                    ]),
+                ]),
+                view('components.form-group', [
+                    'col' => 'col-12',
+                    'label' => 'Deskripsi',
+                    'invalidFeedback' => $errors->first('description'),
+                    'field' => view('components.textarea', [
+                        'name' => 'description',
+                        'value' => old('description'),
+                        'placeholder' => 'Masukkan Deskripsi',
+                        'required' => true,
+                    ]),
+                ]),
+                view('components.form-group', [
+                    'col' => 'col-md-6 col-12',
+                    'label' => 'Penerbit',
+                    'invalidFeedback' => $errors->first('publisher'),
+                    'field' => view('components.input', [
+                        'type' => 'text',
+                        'name' => 'publisher',
+                        'value' => old('publisher'),
+                        'placeholder' => 'Masukkan Nama Penerbit',
+                        'required' => true,
+                    ]),
+                ]),
+                view('components.form-group', [
+                    'col' => 'col-md-6 col-12',
+                    'label' => 'Tanggal Publikasi',
+                    'invalidFeedback' => $errors->first('published_date'),
+                    'field' => view('components.input', [
+                        'type' => 'date',
+                        'name' => 'published_date',
+                        'value' => old('published_date'),
+                        'placeholder' => 'Masukkan Tanggal Publikasi',
+                        'required' => true,
+                    ]),
+                ]),
+                view('components.form-group', [
+                    'col' => 'col-md-6 col-12',
+                    'label' => 'Kategori',
+                    'invalidFeedback' => $errors->first('book_categories'),
+                    'field' => view('components.select-option', [
+                        'name' => 'book_categories',
+                        'key' => true,
+                        'placeholder' => 'Pilih Kategori',
+                        'required' => true,
+                        'options' => \App\Models\Books::$bookCategories,
+                    ]),
+                ]),
+                view('components.form-group', [
+                    'col' => 'col-md-6 col-12',
+                    'label' => 'Gambar',
+                    'invalidFeedback' => $errors->first('image'),
+                    'field' => view('components.input', [
+                        'type' => 'file',
+                        'name' => 'image',
+                        'value' => null,
+                        'placeholder' => 'Masukkan Gambar',
+                        'required' => false,
+                    ]),
+                ]),
+            ],
+        ])
     </div>
 @endsection

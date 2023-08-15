@@ -28,4 +28,6 @@ class Books extends Model
     ];
 
     public static $defaultImageFromCdn =  'https://via.placeholder.com/150';
+
+    public const DEFAULT_IMAGE = 'https://via.placeholder.com/150';
 }

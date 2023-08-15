@@ -20,7 +20,21 @@ class BooksController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:books',
+            'author' => 'required',
+        ]);
+
+        $data = $request->all();
+
+        $data['image'] = Books::DEFAULT_IMAGE;
+
+        try {
+            Books::create($data);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+        }
+        return redirect()->route('books.index')->with('success', 'Book created successfully.');
     }
 
     public function show($book)
@@ -35,6 +49,8 @@ class BooksController extends Controller
 
     public function edit($book)
     {
+        $book = Books::findOrFail($book);
+
         return view('books.edit', compact('book'));
     }
 
