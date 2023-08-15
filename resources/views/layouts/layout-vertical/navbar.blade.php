@@ -17,8 +17,8 @@
                     <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="user-menu d-flex">
                             <div class="user-name text-end me-3">
-                                <h6 class="mb-0 text-gray-600">{{ $name ?? null }}</h6>
-                                <p class="mb-0 text-sm text-gray-600">{{ $role ?? null }}</p>
+                                <h6 class="mb-0 text-gray-600">{{ $name }}</h6>
+                                <p class="mb-0 text-sm text-gray-600">{{ $role }}</p>
                             </div>
                             <div class="user-img d-flex align-items-center">
                                 <div class="avatar avatar-md">
@@ -30,7 +30,7 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton"
                         style="min-width: 11rem;">
                         <li>
-                            <h6 class="dropdown-header">Hello, {{ $name ?? null }} </h6>
+                            <h6 class="dropdown-header">Hello, {{ $name }} </h6>
                         </li>
                         <hr class="dropdown-divider">
                         <li>

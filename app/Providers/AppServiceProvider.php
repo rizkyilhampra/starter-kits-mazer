@@ -35,15 +35,16 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::composer('layouts.layout-vertical.navbar', function ($view) {
-            $view->with('name', auth()->user()->name);
+            $name = auth()->user()->name ?? 'Guest';
+            $view->with('name', $name);
         });
 
         View::composer('layouts.layout-vertical.navbar', function ($view) {
             $role = AuthGroupUser::with(['authGroup' => function ($query) {
                 $query->select('id', 'name');
-            }])->where('user_id', auth()->user()->id)->first('auth_group_id');
+            }])->where('user_id', auth()->user()->id ?? null)->first('auth_group_id');
 
-            $view->with('role', $role->authGroup->name);
+            $view->with('role', $role->authGroup->name ?? 'Guest');
         });
     }
 }
